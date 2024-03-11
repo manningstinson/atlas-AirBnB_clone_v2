@@ -24,6 +24,10 @@ def states_list():
 
 
 if __name__ == '__main__':
-    # Automatically import SQL file before starting Flask app
-    os.system("cat main_0.sql | mysql -hlocalhost -uroot -proot > /dev/null 2>&1")
+    # Import SQL file into the database
+    sql_file_path = os.path.join(os.path.dirname(__file__), 'main_0.sql')
+    import_command = f"cat {sql_file_path} | mysql -hlocalhost -uroot -proot > /dev/null 2>&1"
+    os.system(import_command)
+
+    # Start Flask application
     app.run(host='0.0.0.0', port=5000)
