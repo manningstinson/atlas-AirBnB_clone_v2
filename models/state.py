@@ -19,6 +19,7 @@ class State(BaseModel, Base):
         name = ""
         cities = []
 
+    @property
     def cities(self):
         """Getter for cities related to the state"""
         city_list = []
