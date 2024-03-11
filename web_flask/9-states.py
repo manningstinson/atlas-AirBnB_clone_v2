@@ -4,6 +4,7 @@ Script that starts a Flask web application.
 """
 
 import logging
+import traceback
 from flask import Flask, render_template
 from models import storage
 
@@ -20,6 +21,7 @@ def teardown_session(exception):
 @app.errorhandler(Exception)
 def handle_error(e):
     """Handles internal server errors."""
+    traceback.print_exc()
     logging.error("An error occurred: %s", str(e))
     return 'An internal server error occurred', 500
 
