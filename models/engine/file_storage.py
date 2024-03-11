@@ -17,11 +17,8 @@ classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
 
 
 class FileStorage:
-    """serializes instances to a JSON file & deserializes back to instances"""
-
-    # string - path to the JSON file
+    """Serializes instances to a JSON file & deserializes back to instances"""
     __file_path = "file.json"
-    # dictionary - empty but will store all objects by <class name>.id
     __objects = {}
 
     def all(self, cls=None):
@@ -58,10 +55,6 @@ class FileStorage:
         except:
             pass
 
-    def delete(self, obj=None):
-        """delete obj from __objects if it’s inside"""
-        if obj is not None:
-            key = obj.__class__.__name__ + '.' + obj.id
-            if key in self.__objects:
-                del self.__objects[key]
-
+    def close(self):
+        """Reloads data from the JSON file"""
+        self.reload()

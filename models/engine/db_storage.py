@@ -21,7 +21,7 @@ classes = {"Amenity": Amenity, "City": City,
 
 
 class DBStorage:
-    """interaacts with the MySQL database"""
+    """Interacts with the MySQL database"""
     __engine = None
     __session = None
 
@@ -69,5 +69,8 @@ class DBStorage:
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
-        self.__session = Session
+        self.__session = Session()
 
+    def close(self):
+        """Closes the current database session"""
+        self.__session.close()
