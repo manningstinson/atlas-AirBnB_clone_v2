@@ -28,15 +28,18 @@ def states_list():
     """Displays a list of all State objects."""
     states = storage.all("State").values()
     states_sorted = sorted(states, key=lambda x: x.name)
+    logging.debug("States: %s", states_sorted)
     return render_template('9-states.html', states=states_sorted)
 
 @app.route('/states/<id>', strict_slashes=False)
 def state_cities(id):
     """Displays cities of a specific State."""
     state = storage.get("State", id)
+    logging.debug("State: %s", state)
     if state is None:
         return render_template('9-states.html', not_found=True)
     cities_sorted = sorted(state.cities, key=lambda x: x.name)
+    logging.debug("Cities: %s", cities_sorted)
     return render_template('9-states.html', state=state, cities=cities_sorted)
 
 if __name__ == '__main__':
