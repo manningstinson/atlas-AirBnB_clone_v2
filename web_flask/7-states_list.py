@@ -4,6 +4,7 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
+import os
 
 app = Flask(__name__)
 
@@ -23,4 +24,6 @@ def states_list():
 
 
 if __name__ == '__main__':
+    # Automatically import SQL file before starting Flask app
+    os.system("cat main_0.sql | mysql -hlocalhost -uroot -proot > /dev/null 2>&1")
     app.run(host='0.0.0.0', port=5000)
