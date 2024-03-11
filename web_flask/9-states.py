@@ -13,10 +13,12 @@ app = Flask(__name__)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+
 @app.teardown_appcontext
 def teardown_session(exception):
     """Closes the database session."""
     storage.close()
+
 
 @app.errorhandler(Exception)
 def handle_error(e):
@@ -25,6 +27,7 @@ def handle_error(e):
     logging.error("An error occurred: %s", str(e))
     return 'An internal server error occurred', 500
 
+
 @app.route('/states', strict_slashes=False)
 def states_list():
     """Displays a list of all State objects."""
@@ -32,6 +35,7 @@ def states_list():
     states_sorted = sorted(states, key=lambda x: x.name)
     logging.debug("States: %s", states_sorted)
     return render_template('9-states.html', states=states_sorted)
+
 
 @app.route('/states/<id>', strict_slashes=False)
 def state_cities(id):
@@ -43,6 +47,7 @@ def state_cities(id):
     cities_sorted = sorted(state.cities, key=lambda x: x.name)
     logging.debug("Cities: %s", cities_sorted)
     return render_template('9-states.html', state=state, cities=cities_sorted)
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
