@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>HBNB Filters</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{ url_for('static', filename='styles/3-footer.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{ url_for('static', filename='styles/3-header.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{ url_for('static', filename='styles/4-common.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="{{ url_for('static', filename='styles/6-filters.css') }}"
+		/>
+	</head>
+	<body>
+		<header class="header" id="header">
+			<ul class="header__navbar">
+				<li><a href="/">Home</a></li>
+				<li><a href="/hbnb_filters">Places</a></li>
+				<li><a href="#">Amenities</a></li>
+			</ul>
+		</header>
+		<h1>Filters</h1>
+		<div class="filters">
+			<div class="filter">
+				<h3>States</h3>
+				<ul class="filter__list">
+					{% for state in states %}
+					<li>{{ state.name }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="filter">
+				<h3>Amenities</h3>
+				<ul class="filter__list">
+					{% for amenity in amenities %}
+					<li>{{ amenity.name }}</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		<footer class="footer" id="footer">
+			<p>Footer</p>
+		</footer>
+	</body>
+</html>
